@@ -3,6 +3,8 @@ import selenium
 from selenium.webdriver.common import by
 from time import sleep
 import pandas as pd
+from create import inserir_numeros
+
 
 class Web:
     def __init__(self):
@@ -26,11 +28,13 @@ class Web:
         k = 0
         for i in range(1, 120):
             # print(self.driver.find_element(by.By.XPATH, self.map['concurso']['xpath'].replace('$NUM$', f'{i+3}')).text, end=' | ')
+            jogo.append(int(self.driver.find_element(by.By.XPATH, self.map['concurso']['xpath'].replace('$NUM$', f'{i+3}')).text))
             for j in range(1, 7):
                 k += 1
                 # print(self.driver.find_element(by.By.XPATH, self.map['numeros']['xpath'].replace('$NUM$', f'{k}')).text, end=' ')
                 numero = int(self.driver.find_element(by.By.XPATH, self.map['numeros']['xpath'].replace('$NUM$', f'{k}')).text)
                 jogo.append(numero)
+            inserir_numeros(jogo[0], jogo[1], jogo[2], jogo[3], jogo[4], jogo[5], jogo[6])
             matriz.append(jogo)
             jogo = []
             print('')
